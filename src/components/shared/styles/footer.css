@@ -1,0 +1,12 @@
+.footer{
+  text-align: center;
+  padding: 1em;
+}
+.personal__info__a{
+  color: var(--red);
+}
+@media (  min-width: 950px) {
+  .footer{
+    border-top: 1px solid var(--gray);
+  }
+}
