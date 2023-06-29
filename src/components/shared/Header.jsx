@@ -10,7 +10,11 @@ const Header = () => {
   const handleOpenMenu =() => {
     if (isCloseCart && localStorage.getItem('token') ) {
       return setIsCloseCart(false)
-    }return (setIsCloseCart(true))
+    } else if (!isCloseCart && localStorage.getItem('token')) {
+      return setIsCloseCart(true)
+    } else {
+      return window.location = '/login#/login'
+    }
   }
 
   return (
@@ -37,5 +41,6 @@ const Header = () => {
     </header>
   )
 }
+
 
 export default Header
