@@ -17,6 +17,11 @@ const Home = () => {
 
   const [inputValue, setInputValue] = useState('')
 
+  const [priceMinMax, setPriceMinMax] = useState({
+    min:0,
+    max: Infinity,
+  })
+
   const products = useSelector((states) => states.products)
 
   const handleSearchName = (e) => {
@@ -25,10 +30,16 @@ const Home = () => {
 
   const cbFilter = (prod) => prod.title.toLowerCase().includes(inputValue)
 
+  const cbFilterPrice = (prod) => {
+    const condMin = priceMinMax.min <= prod.price
+    const condMax = prod.price <= priceMinMax.max 
+    return condMin && condMax
+  }
+
   return (
     <div className="home__container">
       <aside className={`home__filter ${isCloseFilter ?'home__filter__close':''}`}>
-        <FilterPrice/>
+        <FilterPrice priceMinMax={priceMinMax} setPriceMinMax={setPriceMinMax} />
         <FilterCategories/>
       </aside>
       <div className="home__searchCard">
@@ -39,7 +50,7 @@ const Home = () => {
         <button onClick={handleOpenFilter} className="home__btnfilter">Filters<i className='bx bx-filter-alt'></i> </button>
         <div className="card__container">
           {
-            products?.filter(cbFilter).map((prod) => (
+            products?.filter(cbFilter).filter(cbFilterPrice).map((prod) => (
               <CardProduct
                 key={prod.id}
                 prod={prod}

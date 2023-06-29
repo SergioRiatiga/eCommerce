@@ -34,3 +34,11 @@
   font-weight: bold;
   font-size: 0.9rem;
 }
+.price__p{ 
+  color: var(--dark-gray);
+  padding: 0.5em;
+}
+.price__pX{
+  cursor: pointer;
+  color: var(--red);
+}
