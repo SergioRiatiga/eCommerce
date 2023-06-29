@@ -13,7 +13,7 @@ const Header = () => {
     } else if (!isCloseCart && localStorage.getItem('token')) {
       return setIsCloseCart(true)
     } else {
-      return window.location = '/login#/login'
+      return window.location = '/#/login'
     }
   }
 
