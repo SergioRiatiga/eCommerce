@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import './styles/header.css'
 import CartMenu from '../shared/CartMenu'
 import { useState } from 'react'
@@ -8,10 +8,9 @@ const Header = () => {
   const [isCloseCart, setIsCloseCart] = useState(true)
 
   const handleOpenMenu =() => {
-    if (isCloseCart) {
+    if (isCloseCart && localStorage.getItem('token') ) {
       return setIsCloseCart(false)
-    }return setIsCloseCart(true)
-    
+    }return (setIsCloseCart(true))
   }
 
   return (

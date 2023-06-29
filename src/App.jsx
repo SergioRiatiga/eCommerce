@@ -12,6 +12,7 @@ import Header from './components/shared/Header'
 import { getCartThunk } from './store/slices/cart.slice'
 import Footer from './components/shared/Footer'
 import PurchasesPage from './pages/PurchasesPage'
+import ProtectedRoutes from './pages/ProtectedRoutes'
 
 function App() {
 
@@ -30,7 +31,10 @@ function App() {
         <Route path='/product/:id' element={<ProductIdPage/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
         <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/purchases' element={<PurchasesPage/>}/>
+        
+        <Route element= {<ProtectedRoutes/>} >
+          <Route path='/purchases' element={<PurchasesPage/>}/>
+        </Route>
       </Routes>
       <Footer/>
     </div>
