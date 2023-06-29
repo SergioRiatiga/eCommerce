@@ -36,7 +36,7 @@ const Home = () => {
           <label className="home__search__label" htmlFor="">Search</label>
           <input value={inputValue} className="home__search__input" onChange={handleSearchName} type="text" />
         </div>
-        <button onClick={handleOpenFilter} className="home__btnfilter">Filters<i class='bx bx-filter-alt'></i> </button>
+        <button onClick={handleOpenFilter} className="home__btnfilter">Filters<i className='bx bx-filter-alt'></i> </button>
         <div className="card__container">
           {
             products?.filter(cbFilter).map((prod) => (
