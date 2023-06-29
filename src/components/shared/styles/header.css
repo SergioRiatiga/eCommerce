@@ -1,11 +1,12 @@
 .header__container{
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   position: fixed;
   background-color: var(--white);
-  z-index: 2;
+  z-index: 10;
   padding: 1em;
+  padding-right: 2em;
 }
 .header__container__logo{
   color: var(--red);
