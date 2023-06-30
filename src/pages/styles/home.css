@@ -9,9 +9,8 @@
   margin: 1em;
   position: fixed;
   background-color: var(--white);
-  z-index: 5;
-  height: 90vh;
-  box-shadow: rgba(0, 0, 0, 0.2) 1px 10px 1px ;
+  z-index: 3;
+  height: 92vh;
 }
 .home__filter__close{
   left: -100%;
