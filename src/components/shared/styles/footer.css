@@ -8,5 +8,6 @@
 @media (  min-width: 950px) {
   .footer{
     border-top: 1px solid var(--gray);
+    margin-top: 1em;
   }
 }

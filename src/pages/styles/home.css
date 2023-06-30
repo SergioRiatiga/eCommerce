@@ -10,7 +10,7 @@
   position: fixed;
   background-color: var(--white);
   z-index: 5;
-  height: 100vh;
+  height: 90vh;
   box-shadow: rgba(0, 0, 0, 0.2) 1px 10px 1px ;
 }
 .home__filter__close{
@@ -79,18 +79,5 @@
   }
   .home__btnfilter{
     scale:calc(0);
-  }
-}
-@media ( min-width:920px) {
-  .home__filter{
-    margin: 1em;
-    position: fixed;
-    left: 0;
-  }
-  .home__btnfilter{
-    scale:calc(0);
-  }
-  .home__filter{
-    box-shadow: none;
   }
 }
