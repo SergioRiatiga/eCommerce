@@ -1,56 +1,50 @@
 import { useForm } from "react-hook-form"
 import useAuth from "../hooks/useAuth"
 import { Link } from "react-router-dom"
-import './styles/registerPage.css'
 
 const RegisterPage = () => {
-
-  const {register, handleSubmit, reset} = useForm()
-  const { createUser } = useAuth()
-
+  const {register,handleSubmit,reset} = useForm()
+  const {createUser} = useAuth()
   const submit =(data) => {
     const url = 'https://e-commerce-api-v2.academlo.tech/api/v1/users'
-    createUser(url, data)
+    createUser(url,data)
     reset({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      phone: '',
+      firstName:'',
+      lastName:'',
+      email:'',
+      password:'',
+      phone:''
     })
   }
-
   return (
-    <div className="register__container">
-      <div className="registerCard">
-        <h2 className="registerCard__title">Sign Up</h2>
-        <form className="registerCard__form" onSubmit={handleSubmit(submit)}>
-          <div className="registerCard__form-item">
-            <label className="registerCard__form-label" htmlFor="firstName">First name</label>
-            <input className="registerCard__form-input" {...register('firstName')} id="firstName" type="text" />
-          </div>
-          <div className="registerCard__form-item">
-            <label className="registerCard__form-label" htmlFor="lastName">Last name</label>
-            <input className="registerCard__form-input" {...register('lastName')} id="lastName" type="text" />
-          </div>
-          <div className="registerCard__form-item">
-            <label className="registerCard__form-label" htmlFor="email">E-mail</label>
-            <input className="registerCard__form-input" {...register('email')} id="email" type="email" />
-          </div>
-          <div className="registerCard__form-item">
-            <label className="registerCard__form-label" htmlFor="password">Password</label>
-            <input className="registerCard__form-input" {...register('password')} id="password" type="password" />
-          </div>
-          <div className="registerCard__form-item">
-            <label className="registerCard__form-label" htmlFor="phone">Phone</label>
-            <input className="registerCard__form-input" {...register('phone')} id="phone" type="number" />
-          </div>
-          <button className="registerCard__btn">Sing up</button>
-        </form>
-        <p className="registerCard__redirect">Already have an account? <Link className="registerCard__redirect-link" to="/login">Login</Link></p>
-      </div>
+    <div className="h-screen flex justify-center items-center">
+      <form className="mx-4 mt-8 border-t shadow rounded-xl p-4 w-[400px]" onSubmit={handleSubmit(submit)}>
+        <h1 className="text-2xl font-semibold mb-8">Sing Up</h1>
+        <div className="flex flex-col gap-1 mb-4">
+          <label htmlFor="firstName">First Name</label>
+          <input {...register('firstName')} className="border p-1" type="text" id="firstName" />
+        </div>
+        <div className="flex flex-col gap-1 mb-4">
+          <label htmlFor="lastName">Last Name</label>
+          <input {...register('lastName')} className="border p-1" type="text" id="lastName" />
+        </div>
+        <div className="flex flex-col gap-1 mb-4">
+          <label htmlFor="email">Email</label>
+          <input {...register('email')} className="border p-1" type="email" id="email" />
+        </div>
+        <div className="flex flex-col gap-1 mb-4">
+          <label htmlFor="password">Password</label>
+          <input {...register('password')} className="border p-1" type="password" id="password" />
+        </div>
+        <div className="flex flex-col gap-1 mb-4">
+          <label htmlFor="phone">Phone(10 characters)</label>
+          <input {...register('phone')} className="border p-1"
+          type="text" id="phone" />
+        </div>
+        <button className="bg-red-500 hover:bg-red-600 w-full text-white py-2">Sing Up</button>
+        <p className="text-sm font-extralight mt-4">Already have an account? <Link className="text-red-400 hover:text-red-200" to={'/login'}>Log in</Link></p>
+      </form>
     </div>
-    
   )
 }
 

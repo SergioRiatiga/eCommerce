@@ -1,35 +1,30 @@
 import { useDispatch } from "react-redux"
 import { deleteCartThunk } from "../../store/slices/cart.slice"
-import './styles/cartElement.css'
 
 const CartElement = ({prod}) => {
-
   const dispatch = useDispatch()
-
-  const handleDelete = () => {
+  const handleDelete =() => {
     dispatch(deleteCartThunk(prod.id))
   }
-
   return (
-    <article className="cart">
-      <section className="cart__section">
-        <header className="cart__header">
-          <img className="cart__img" src={prod.product.images[0].url} alt="" />
-        </header>
-        <div className="cart__namePrice">
-          <h3 className="cart__name">{prod.product.title} </h3>
-          <p className="cart__p">
-            <span className="cart__quantity">{prod.quantity} </span> x 
-            <span className="cart__price"> ${prod.product.price} </span>
+    <article>
+      <header className="grid grid-cols-3 items-center ">
+        <section className="">
+          <img  className="w-16 h-16 object-contain" src={prod.product.images[0].url} alt="" />
+        </section>
+        <section className="flex flex-col">
+          <h3 className="text-xs">{prod.product.title} </h3>
+          <p>
+            <span>{prod.quantity} </span> x <span>${prod.product.price} </span>
           </p>
-        </div>
-        <button className="cart__btn" onClick={handleDelete}>
+        </section>
+        <button onClick={handleDelete}  className="text-red-500">
           <i className='bx bx-trash'></i>
         </button>
-      </section>
-      <footer className="cart__footer">
-        <span className="cart__total__label">Total:</span>
-        <span className="cart__total__price"> ${prod.quantity*prod.product.price}</span>
+      </header>
+      <footer className="flex justify-end gap-4 mt-2 mb-8">
+        <span className=" text-gray-300">Total: </span>
+        <span className="font-semibold">${prod.quantity*prod.product.price}.00 </span>
       </footer>
     </article>
   )

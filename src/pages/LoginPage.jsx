@@ -1,35 +1,33 @@
 import { useForm } from "react-hook-form"
 import useAuth from "../hooks/useAuth"
 import { Link } from "react-router-dom"
-import './styles/loginPage.css'
 
 const LoginPage = () => {
-
-  const {register, reset, handleSubmit} = useForm()
+  const {register,handleSubmit,reset} = useForm()
   const {loginUser} = useAuth()
-
-  const submit = (data) => {
-    const url= 'https://e-commerce-api-v2.academlo.tech/api/v1/users/login'
-    loginUser(url, data)
+  const submit =(data) => {
+    const url = 'https://e-commerce-api-v2.academlo.tech/api/v1/users/login'
+    loginUser(url,data)
+    reset({
+      email:'',
+      password:''
+    })
   }
-
   return (
-    <div className="login__container">
-      <div className="loginCard">
-        <h2 className="loginCard__welcome">Welcome! Please, enter your email and password to continue.</h2>
-        <form className="loginCard__form" onSubmit={handleSubmit(submit)}>
-          <div className="loginCard__form__email">
-            <label className="loginCard__form__email-label" htmlFor="email">E-mail</label>
-            <input className="loginCard__form__email-input" {...register('email')} id="email" type="email" />
-          </div>
-          <div className="loginCard__form__password">
-            <label className="loginCard__form__password-label" htmlFor="password">Password</label>
-            <input className="loginCard__form__password-input" {...register('password')} id="password" type="password" />
-          </div>
-          <button className="loginCard__btn">Login</button>
-        </form>
-        <p className="loginCard__redirect">Don't have an account? <Link className="loginCard__redirect-link" to='/register'> Sing up</Link></p>
-      </div>
+    <div className="h-screen flex justify-center items-center">
+      <form className="mx-4 border-t shadow rounded-xl p-4 w-[400px]" onSubmit={handleSubmit(submit)}>
+        <h1 className="text-2xl font-semibold mb-8">Welcome! Please, enter your email and password to continue.</h1>
+        <div className="flex flex-col gap-1 mb-4">
+          <label htmlFor="email">Email</label>
+          <input {...register('email')} className="border p-1" type="email" id="email"/>
+        </div>
+        <div className="flex flex-col gap-1 mb-4">
+          <label htmlFor="password">Password</label>
+          <input {...register('password')} className="border p-1" type="password" id="password"/>
+        </div>
+        <button className="bg-red-500 hover:bg-red-600 w-full text-white py-2">Login</button>
+        <p className="text-sm font-extralight mt-4"> Don't have an account? <Link className="text-red-400 hover:text-red-200" to={'/register'}>Sing up</Link></p>
+      </form>
     </div>
   )
 }

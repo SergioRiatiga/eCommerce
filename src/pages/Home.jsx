@@ -1,54 +1,63 @@
 import { useSelector } from "react-redux"
-import CardProduct from "../components/Home/CardProduct";
-import './styles/home.css'
-import { useState } from "react";
-import FilterCategories from "../components/Home/FilterCategories";
-import FilterPrice from "../components/Home/FilterPrice";
+import CardProduct from "../components/Home/CardProduct"
+import { useState } from "react"
+import FilterCategory from "../components/Home/FilterCategory"
+import FilterPrice from "../components/Home/FilterPrice"
 
 const Home = () => {
-
-  const [isCloseFilter, setIsCloseFilter] = useState(true)
-
-  const handleOpenFilter = () => {
-    if (isCloseFilter) {
-      return setIsCloseFilter(false)
-    } return setIsCloseFilter(true)
-  }
-
   const [inputValue, setInputValue] = useState('')
-
-  const [priceMinMax, setPriceMinMax] = useState({
+  const [priceMinMax, setpriceMinMax] = useState({
     min:0,
-    max: Infinity,
+    max:Infinity
   })
-
   const products = useSelector((states) => states.products)
-
-  const handleSearchName = (e) => {
+  const handleSearchName= (e) => {
     setInputValue(e.target.value.toLowerCase())
   }
-
   const cbFilter = (prod) => prod.title.toLowerCase().includes(inputValue)
+  const cbFilterPrice = (prod) => priceMinMax.min <= prod.price && prod.price <= priceMinMax.max
 
-  const cbFilterPrice = (prod) => {
-    const condMin = priceMinMax.min <= prod.price
-    const condMax = prod.price <= priceMinMax.max 
-    return condMin && condMax
+  const [filter, setFilter] = useState(true)
+
+  const handleFilter = () => {
+    setFilter(!filter)
   }
 
   return (
-    <div className="home__container">
-      <aside className={`home__filter ${isCloseFilter ?'home__filter__close':''}`}>
-        <FilterPrice priceMinMax={priceMinMax} setPriceMinMax={setPriceMinMax} />
-        <FilterCategories/>
-      </aside>
-      <div className="home__searchCard">
-        <div className="home__search">
-          <label className="home__search__label" htmlFor="">Search</label>
-          <input value={inputValue} className="home__search__input" onChange={handleSearchName} type="text" />
+    <div className="pt-16">
+      <div className="w-full  flex justify-center">
+        <label className="my-4  bg-red-500 text-white px-4" htmlFor="">Search</label>
+        <input 
+          value={inputValue} 
+          className="border w-1/3 my-4 pl-2" 
+          onChange={handleSearchName} 
+          type="text" />
+      </div>
+      <div className="w-full flex justify-end pr-10 cursor-pointer">
+        <div className="md:scale-0" onClick={handleFilter}>
+          <span className="text-gray-400 mr-4">
+            Filter
+          </span>
+          {
+            filter?
+            <span className=" text-gray-400 text-xl">
+              <i className='bx bx-filter-alt'></i>
+            </span> :
+            <span className="text-red-500">
+              <i className='bx bx-x'></i>
+            </span>
+          }
         </div>
-        <button onClick={handleOpenFilter} className="home__btnfilter">Filters<i className='bx bx-filter-alt'></i> </button>
-        <div className="card__container">
+      </div>
+      <div className="flex justify-center">
+        <aside className={`p-4 mr-8 flex z-10 flex-col absolute h-screen left-12 md:left-0 w-70 bg-white overflow-y-auto md:scale-100 md:translate-y-0 duration-500 ${filter && 'scale-0 -translate-y-full duration-500'}`}>
+          <FilterPrice
+            priceMinMax={priceMinMax}
+            setpriceMinMax={setpriceMinMax}
+          />
+          <FilterCategory/>
+        </aside>
+        <div className="md:ml-48 grid place-content-center md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {
             products?.filter(cbFilter).filter(cbFilterPrice).map((prod) => (
               <CardProduct
@@ -59,7 +68,6 @@ const Home = () => {
           }
         </div>
       </div>
-      
     </div>
   )
 }
