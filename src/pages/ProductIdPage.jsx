@@ -3,7 +3,7 @@ import useFetch from "../hooks/useFetch"
 import { useEffect } from "react"
 import ProductInfo from "../components/ProductId/ProductInfo"
 import SimilarProducts from "../components/ProductId/SimilarProducts"
-import SliderImgs from "../components/ProductId/SliderImgs"
+import SliderImgs from "../components/ProductId/SlidersImgs"
 
 const ProductIdPage = () => {
   const {id} = useParams()
@@ -27,7 +27,6 @@ const ProductIdPage = () => {
           product={product}
         />
       </div>
-      
     </div>
   )
 }
