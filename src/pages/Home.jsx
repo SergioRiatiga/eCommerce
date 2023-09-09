@@ -50,7 +50,7 @@ const Home = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <aside className={`p-4 mr-8 flex z-10 flex-col absolute h-screen left-12 md:left-0 w-70 bg-white overflow-y-auto md:scale-100 md:translate-y-0 duration-500 ${filter && 'scale-0 -translate-y-full duration-500'}`}>
+        <aside className={`p-4 flex z-10 flex-col absolute h-screen justify-center md:left-0 w-70 bg-white overflow-y-auto md:scale-100 md:translate-y-0 duration-500 ${filter && 'scale-0 -translate-y-full duration-500'}`}>
           <FilterPrice
             priceMinMax={priceMinMax}
             setpriceMinMax={setpriceMinMax}
